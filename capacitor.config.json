@@ -1,0 +1,13 @@
+{
+  "appId": "com.noorehidayat.app",
+  "appName": "نورِ ہدایت",
+  "webDir": "www",
+  "android": { "allowMixedContent": true },
+  "plugins": {
+    "LocalNotifications": {
+      "smallIcon": "ic_stat_adhan",
+      "iconColor": "#0E5C47",
+      "sound": "adhan.wav"
+    }
+  }
+}

@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0e5c47">
+<title>نورِ ہدایت | Namaz, Qibla, Azkar & Duas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Nastaliq+Urdu:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --emerald:#0e5c47; --emerald-deep:#083b2e; --emerald-lite:#12705a;
+  --gold:#d9a326; --gold-soft:#f3d99a;
+  --ink:#2b2b33; --ink-soft:#6b6b78;
+  --card:#fff; --line:rgba(14,92,71,.14); --plum:#a8306a;
+  --t1-bg:#fde8ef; --t1-dot:#e0407a;
+  --t2-bg:#fdf0da; --t2-dot:#eda42a;
+  --t3-bg:#e6f6e3; --t3-dot:#4aae4e;
+  --t4-bg:#e2f1fb; --t4-dot:#2b9ad8;
+  --t5-bg:#efe8fa; --t5-dot:#8a5fc9;
+  --t6-bg:#fce7f0; --t6-dot:#d5397d;
+  --ar-size:23px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:
+    radial-gradient(1100px 460px at 100% -10%, #ffeef4 0%, transparent 60%),
+    radial-gradient(900px 460px at 0% 0%, #e9f8f0 0%, transparent 55%),
+    linear-gradient(#fffaf6,#fdf6f8 60%,#f3fbf6);
+  background-attachment:fixed;
+  color:var(--ink);
+  font-family:'Plus Jakarta Sans','Noto Nastaliq Urdu',system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased; min-height:100vh;
+}
+.wrap{max-width:880px;margin:0 auto;padding:0 13px 96px}
+button{font:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* header */
+.topbar{position:sticky;top:0;z-index:50;
+  background:linear-gradient(180deg,var(--emerald) 0%,var(--emerald-deep) 100%);
+  border-bottom:2px solid var(--gold);padding:9px 13px;display:flex;align-items:center;gap:10px}
+.topbar h1{margin:0;color:#fff;font-family:'Noto Nastaliq Urdu',serif;font-size:18px;line-height:2;font-weight:700;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar small{display:block;font-size:9.5px;letter-spacing:.15em;color:var(--gold-soft);direction:ltr;line-height:1}
+.iconbtn{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;
+  width:35px;height:35px;border-radius:11px;cursor:pointer;display:grid;place-items:center;font-size:15px;flex:none}
+.iconbtn:hover{background:rgba(255,255,255,.25)}
+.grow{flex:1}
+
+/* tabs */
+.tabbar{position:fixed;bottom:0;left:0;right:0;z-index:60;display:flex;
+  background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-top:1.5px solid var(--line);
+  padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+.tabbar button{flex:1;background:none;border:0;padding:6px 2px;border-radius:12px;cursor:pointer;
+  color:var(--ink-soft);display:grid;justify-items:center;gap:3px;font-size:11px;
+  font-family:'Noto Nastaliq Urdu',sans-serif;line-height:1.9}
+.tabbar button svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.7}
+.tabbar button[aria-selected="true"]{color:var(--emerald);background:#e8f6f0;font-weight:700}
+.page{display:none}.page.on{display:block}
+
+/* generic card */
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:18px;
+  box-shadow:0 3px 14px rgba(14,92,71,.06)}
+.sec-title{font-family:'Noto Nastaliq Urdu',serif;font-size:17px;font-weight:700;
+  color:var(--emerald);margin:20px 4px 10px;line-height:2}
+
+/* ---- prayer hero ---- */
+.next{margin-top:15px;border-radius:22px;border:2px solid var(--gold);
+  background:linear-gradient(160deg,#0f6650,#08402f);color:#fff;padding:22px 18px;text-align:center;
+  position:relative;overflow:hidden;box-shadow:0 10px 28px rgba(8,59,46,.22)}
+.next::after{content:"";position:absolute;width:170px;height:170px;border-radius:50%;bottom:-90px;left:-60px;
+  background:radial-gradient(circle,rgba(217,163,38,.32),transparent 68%)}
+.next .lbl{position:relative;color:var(--gold-soft);font-size:12px;letter-spacing:.13em;direction:ltr}
+.next .name{position:relative;font-family:'Noto Nastaliq Urdu',serif;font-size:32px;line-height:1.8;font-weight:700;margin:2px 0}
+.next .cd{position:relative;font-size:15px;color:#cdeadd;direction:ltr}
+.next .place{position:relative;margin-top:10px;font-family:'Noto Nastaliq Urdu',serif;font-size:12.5px;color:#a9d6c4;line-height:2}
+
+/* prayer rows */
+.prayers{display:grid;gap:9px;margin-top:14px}
+.p-row{display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:15px;
+  border:1px solid rgba(0,0,0,.05);box-shadow:0 2px 8px rgba(0,0,0,.045)}
+.p-row:nth-child(1){background:var(--t5-bg)} .p-row:nth-child(2){background:var(--t2-bg)}
+.p-row:nth-child(3){background:var(--t4-bg)} .p-row:nth-child(4){background:var(--t3-bg)}
+.p-row:nth-child(5){background:var(--t1-bg)} .p-row:nth-child(6){background:var(--t6-bg)}
+.p-row.now{outline:2.5px solid var(--emerald);outline-offset:1px}
+.p-row .ic{width:34px;height:34px;border-radius:11px;flex:none;display:grid;place-items:center;
+  background:rgba(255,255,255,.7);font-size:16px}
+.p-row .nm{font-family:'Noto Nastaliq Urdu',serif;font-size:17px;font-weight:700;line-height:2}
+.p-row .sub{font-size:11px;color:var(--ink-soft);direction:ltr}
+.p-row .tm{margin-inline-start:auto;font-size:17px;font-weight:700;direction:ltr;color:#123f33;
+  font-variant-numeric:tabular-nums}
+.bell{background:none;border:0;cursor:pointer;font-size:17px;opacity:.35;padding:4px}
+.bell[aria-pressed="true"]{opacity:1}
+
+/* selects */
+.selrow{display:grid;gap:10px;margin-top:14px}
+@media(min-width:620px){.selrow{grid-template-columns:1fr 1fr}}
+.field{background:#fff;border:1.5px solid var(--line);border-radius:15px;padding:11px 14px}
+.field label{display:block;font-family:'Noto Nastaliq Urdu',serif;font-size:13px;color:var(--ink-soft);line-height:2}
+.field select,.field input{width:100%;border:0;background:none;font-size:15px;font-weight:600;
+  color:var(--emerald);font-family:'Noto Nastaliq Urdu',sans-serif;padding:2px 0}
+.field select:focus,.field input:focus{outline:none}
+.note{font-family:'Noto Nastaliq Urdu',serif;font-size:13px;color:var(--ink-soft);line-height:2.2;margin:10px 4px}
+
+.btn{border:1.5px solid var(--line);background:#fff;color:var(--emerald);border-radius:13px;
+  padding:11px 16px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Noto Nastaliq Urdu',sans-serif}
+.btn.primary{background:var(--emerald);color:#fff;border-color:var(--emerald)}
+.btn:hover{filter:brightness(1.05)}
+.btnrow{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}
+
+/* ---- qibla ---- */
+.compass{margin:18px auto 0;width:min(320px,86vw);aspect-ratio:1;position:relative;
+  border-radius:50%;background:radial-gradient(circle at 50% 40%,#0f6650,#062e22);
+  border:3px solid var(--gold);box-shadow:0 14px 34px rgba(8,59,46,.28);display:grid;place-items:center}
+.dial{position:absolute;inset:0;transition:transform .18s ease-out}
+.needle{position:absolute;inset:0;transition:transform .18s ease-out}
+.qmeta{text-align:center;margin-top:16px}
+.qmeta .deg{font-size:34px;font-weight:700;color:var(--emerald);direction:ltr;font-variant-numeric:tabular-nums}
+.qmeta .txt{font-family:'Noto Nastaliq Urdu',serif;font-size:14.5px;color:var(--ink-soft);line-height:2.2}
+
+/* ---- azkar ---- */
+.seg{display:flex;gap:8px;margin-top:15px}
+.seg button{flex:1;border:1.5px solid var(--line);background:#fff;color:var(--emerald);
+  border-radius:13px;padding:11px;font-family:'Noto Nastaliq Urdu',sans-serif;font-size:15px;cursor:pointer;line-height:2}
+.seg button[aria-pressed="true"]{background:var(--emerald);color:#fff;border-color:var(--emerald)}
+.zikr{border-radius:17px;padding:15px;margin-top:11px;border:1px solid rgba(0,0,0,.05);
+  box-shadow:0 2px 8px rgba(0,0,0,.045)}
+.zikr:nth-of-type(6n+1){background:var(--t1-bg)} .zikr:nth-of-type(6n+2){background:var(--t2-bg)}
+.zikr:nth-of-type(6n+3){background:var(--t3-bg)} .zikr:nth-of-type(6n+4){background:var(--t4-bg)}
+.zikr:nth-of-type(6n+5){background:var(--t5-bg)} .zikr:nth-of-type(6n+6){background:var(--t6-bg)}
+.zikr.done{opacity:.5}
+.zikr .ar{font-family:'Amiri',serif;font-size:var(--ar-size);line-height:2.15;font-weight:700;color:#123f33;text-align:right}
+.zikr .ur{font-family:'Noto Nastaliq Urdu',serif;font-size:14.5px;line-height:2.35;color:#3a2b33;margin-top:8px}
+.zikr .meta{display:flex;align-items:center;gap:10px;margin-top:11px;flex-wrap:wrap}
+.zikr .ref{font-family:'Noto Nastaliq Urdu',serif;font-size:12px;color:var(--ink-soft);line-height:2}
+.count{margin-inline-start:auto;background:#fff;border:1.5px solid var(--emerald);color:var(--emerald);
+  border-radius:999px;padding:7px 17px;font-weight:700;font-size:15px;cursor:pointer;direction:ltr;
+  font-variant-numeric:tabular-nums;min-width:78px}
+.count.done{background:var(--emerald);color:#fff}
+
+/* ---- duas ---- */
+.search{position:relative;margin-top:15px}
+.search input{width:100%;padding:13px 42px 13px 15px;border-radius:14px;border:1.5px solid var(--line);
+  background:#fff;font-size:15px;font-family:'Noto Nastaliq Urdu',sans-serif}
+.search svg{position:absolute;right:14px;top:13px;opacity:.45}
+.duacard{background:#fff;border:1.5px solid var(--line);border-radius:17px;padding:14px 15px;cursor:pointer;
+  text-align:right;width:100%;display:flex;align-items:center;gap:12px;margin-top:11px;
+  box-shadow:0 3px 12px rgba(14,92,71,.06);color:inherit}
+.duacard .idx{width:38px;height:38px;border-radius:12px;flex:none;display:grid;place-items:center;
+  background:var(--t3-bg);color:var(--emerald);font-weight:700;direction:ltr}
+.duacard h3{margin:0;font-family:'Noto Nastaliq Urdu',serif;font-size:16.5px;line-height:2;font-weight:700}
+.duacard p{margin:0;font-size:12px;color:var(--ink-soft);direction:ltr;text-align:right}
+.hero{margin-top:15px;border-radius:22px;background:linear-gradient(160deg,#0f6650,#08402f);
+  border:2px solid var(--gold);padding:24px 18px;text-align:center;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;width:160px;height:160px;border-radius:50%;top:-80px;right:-50px;
+  background:radial-gradient(circle,rgba(217,163,38,.32),transparent 68%)}
+.hero h2{position:relative;margin:0;color:#fff;font-family:'Noto Nastaliq Urdu',serif;font-size:26px;line-height:2.1;font-weight:700}
+.hero .en{position:relative;margin:2px 0 0;color:var(--gold-soft);font-size:14px;direction:ltr;font-weight:600}
+.narr{position:relative;display:inline-block;margin-top:12px;padding:5px 16px;border-radius:999px;
+  background:var(--plum);color:#ffe9f3;font-family:'Noto Nastaliq Urdu',serif;font-size:12px;line-height:2.2}
+.rows{display:grid;gap:10px;margin-top:15px}
+.row{display:grid;grid-template-columns:1fr;border-radius:16px;overflow:hidden;
+  border:1px solid rgba(0,0,0,.05);box-shadow:0 2px 8px rgba(0,0,0,.045)}
+@media(min-width:760px){.row{grid-template-columns:1fr 1fr;gap:10px;border:0;box-shadow:none;overflow:visible}}
+.cell{padding:13px 13px;display:flex;gap:10px;align-items:flex-start}
+@media(min-width:760px){.cell{border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.05)}}
+.num{width:26px;height:26px;flex:none;border-radius:50%;color:#fff;display:grid;place-items:center;
+  font-size:12.5px;font-weight:700;direction:ltr;margin-top:3px}
+.ar-txt{font-family:'Amiri',serif;font-size:var(--ar-size);line-height:2.1;font-weight:700;color:#123f33;flex:1;text-align:right}
+.ur-txt{font-family:'Noto Nastaliq Urdu',serif;font-size:14.5px;line-height:2.35;color:#3a2b33;flex:1;text-align:right}
+.en-txt{font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;line-height:1.65;color:#4a4a55;flex:1;text-align:left;direction:ltr}
+.cell.hidden{display:none}
+.row:nth-child(6n+1) .cell{background:var(--t1-bg)} .row:nth-child(6n+1) .num{background:var(--t1-dot)}
+.row:nth-child(6n+2) .cell{background:var(--t2-bg)} .row:nth-child(6n+2) .num{background:var(--t2-dot)}
+.row:nth-child(6n+3) .cell{background:var(--t3-bg)} .row:nth-child(6n+3) .num{background:var(--t3-dot)}
+.row:nth-child(6n+4) .cell{background:var(--t4-bg)} .row:nth-child(6n+4) .num{background:var(--t4-dot)}
+.row:nth-child(6n+5) .cell{background:var(--t5-bg)} .row:nth-child(6n+5) .num{background:var(--t5-dot)}
+.row:nth-child(6n+6) .cell{background:var(--t6-bg)} .row:nth-child(6n+6) .num{background:var(--t6-dot)}
+.benefit{background:#fdeaf2;border:1.5px dashed #e88ab4;border-radius:18px;padding:15px 17px;margin-top:18px}
+.benefit b{color:var(--plum);font-family:'Noto Nastaliq Urdu',serif;font-size:15px;line-height:2.2}
+.benefit p{margin:5px 0 0;font-family:'Noto Nastaliq Urdu',serif;font-size:14px;line-height:2.3;color:#4b3540}
+.ref{margin-top:13px;text-align:center;color:var(--emerald);font-family:'Noto Nastaliq Urdu',serif;
+  font-size:13px;line-height:2.2;padding:9px;border-top:1.5px solid var(--line)}
+
+.toast{position:fixed;bottom:86px;left:50%;transform:translateX(-50%) translateY(14px);
+  background:var(--emerald-deep);color:#fff;padding:10px 18px;border-radius:999px;font-size:13.5px;
+  opacity:0;pointer-events:none;transition:.25s;z-index:80;font-family:'Noto Nastaliq Urdu',sans-serif}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <button class="iconbtn" id="backBtn" style="display:none">→</button>
+  <div style="min-width:0">
+    <h1 id="ttl">نورِ ہدایت</h1>
+    <small>NAMAZ · QIBLA · AZKAR</small>
+  </div>
+  <span class="grow"></span>
+  <button class="iconbtn" id="sizeBtn" title="Arabic size">ﺃ</button>
+</header>
+
+<main class="wrap">
+
+<!-- ================= PRAYER ================= -->
+<section class="page on" id="pg-salah">
+  <div class="next" id="nextCard">
+    <div class="lbl">NEXT PRAYER</div>
+    <div class="name" id="nextName">—</div>
+    <div class="cd" id="nextCd">مقام معلوم کریں</div>
+    <div class="place" id="place"></div>
+  </div>
+
+  <div class="prayers" id="prayers"></div>
+
+  <div class="selrow">
+    <div class="field">
+      <label>عصر کا مسلک</label>
+      <select id="madhab">
+        <option value="1">شافعی / مالکی / حنبلی (سایہ ۱ گنا)</option>
+        <option value="2">حنفی (سایہ ۲ گنا)</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>حساب کا طریقہ</label>
+      <select id="method">
+        <option value="karachi">کراچی — یونیورسٹی آف اسلامک سائنسز</option>
+        <option value="mwl">مسلم ورلڈ لیگ</option>
+        <option value="isna">ISNA — شمالی امریکہ</option>
+        <option value="egypt">مصری جنرل اتھارٹی</option>
+        <option value="makkah">ام القریٰ — مکہ مکرمہ</option>
+        <option value="dubai">خلیج / دبئی</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="btnrow">
+    <button class="btn primary" id="locBtn">📍 مقام معلوم کریں</button>
+    <button class="btn" id="manualBtn">دستی مقام</button>
+    <button class="btn" id="notifBtn">🔔 اذان الرٹ آن کریں</button>
+  </div>
+
+  <p class="note">
+    گھنٹی کے نشان پر ٹیپ کر کے ہر نماز کا الارم الگ الگ آن یا آف کریں۔
+    براؤزر میں الرٹ صرف اُس وقت بجے گا جب ایپ کھلی ہو — اینڈرائیڈ ایپ میں یہ پس منظر میں بھی چلے گا
+    (نیچے دی گئی ہدایات دیکھیں)۔
+  </p>
+</section>
+
+<!-- ================= QIBLA ================= -->
+<section class="page" id="pg-qibla">
+  <div class="compass">
+    <svg class="dial" id="dial" viewBox="0 0 300 300">
+      <circle cx="150" cy="150" r="138" fill="none" stroke="rgba(243,217,154,.28)" stroke-width="1"/>
+      <circle cx="150" cy="150" r="118" fill="none" stroke="rgba(243,217,154,.18)" stroke-width="1"/>
+      <g fill="#f3d99a" font-size="15" font-weight="700" text-anchor="middle" font-family="Plus Jakarta Sans">
+        <text x="150" y="30">N</text><text x="278" y="156">E</text>
+        <text x="150" y="285">S</text><text x="22" y="156">W</text>
+      </g>
+      <g stroke="rgba(243,217,154,.45)" stroke-width="1.5">
+        <line x1="150" y1="14" x2="150" y2="30"/><line x1="150" y1="270" x2="150" y2="286"/>
+        <line x1="14" y1="150" x2="30" y2="150"/><line x1="270" y1="150" x2="286" y2="150"/>
+      </g>
+    </svg>
+    <svg class="needle" id="needle" viewBox="0 0 300 300">
+      <g id="kaabaMark">
+        <line x1="150" y1="150" x2="150" y2="52" stroke="#d9a326" stroke-width="4" stroke-linecap="round"/>
+        <polygon points="150,34 160,58 140,58" fill="#d9a326"/>
+        <rect x="139" y="60" width="22" height="20" rx="3" fill="#0b2c22" stroke="#d9a326" stroke-width="2"/>
+        <rect x="139" y="66" width="22" height="4" fill="#d9a326"/>
+      </g>
+      <circle cx="150" cy="150" r="9" fill="#f3d99a"/>
+    </svg>
+  </div>
+  <div class="qmeta">
+    <div class="deg" id="qdeg">—</div>
+    <div class="txt" id="qtxt">قبلہ معلوم کرنے کے لیے مقام کی اجازت دیں</div>
+  </div>
+  <div class="btnrow" style="justify-content:center">
+    <button class="btn primary" id="qLocBtn">📍 مقام</button>
+    <button class="btn" id="qCompassBtn">🧭 کمپاس آن کریں</button>
+  </div>
+  <p class="note">
+    فون کو ہاتھ میں سیدھا رکھیں۔ اگر سُوئی نہ ہلے تو آپ کے فون کا میگنیٹو میٹر دستیاب نہیں —
+    اس صورت میں اوپر دی گئی ڈگری کو عام کمپاس ایپ پر شمال سے ناپ لیں۔
+  </p>
+</section>
+
+<!-- ================= AZKAR ================= -->
+<section class="page" id="pg-azkar">
+  <div class="seg">
+    <button id="segM" aria-pressed="true">☀️ صبح کے اذکار</button>
+    <button id="segE" aria-pressed="false">🌙 شام کے اذکار</button>
+  </div>
+  <p class="note" id="azkarNote"></p>
+  <div id="azkarList"></div>
+  <div class="btnrow"><button class="btn" id="resetZ">شمار دوبارہ شروع کریں</button></div>
+</section>
+
+<!-- ================= DUAS ================= -->
+<section class="page" id="pg-dua">
+  <div id="duaList">
+    <div class="search">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0e5c47" stroke-width="2">
+        <circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input id="search" type="search" placeholder="دعا تلاش کریں…">
+    </div>
+    <div id="cards"></div>
+  </div>
+  <article id="duaDetail" style="display:none"></article>
+  <div class="btnrow" id="duaActions" style="display:none">
+    <button class="btn" id="langBtn">اردو / English</button>
+    <button class="btn primary" id="shareBtn">شیئر کریں</button>
+  </div>
+</section>
+
+</main>
+
+<nav class="tabbar" role="tablist">
+  <button data-pg="salah" aria-selected="true" role="tab">
+    <svg viewBox="0 0 24 24"><path d="M12 3l7 5v11H5V8l7-5z"/><path d="M9 19v-4a3 3 0 0 1 6 0v4"/></svg>نماز</button>
+  <button data-pg="qibla" aria-selected="false" role="tab">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15 9l-2 5-5 2 2-5 5-2z"/></svg>قبلہ</button>
+  <button data-pg="azkar" aria-selected="false" role="tab">
+    <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9"/><circle cx="18" cy="6" r="2"/></svg>اذکار</button>
+  <button data-pg="dua" aria-selected="false" role="tab">
+    <svg viewBox="0 0 24 24"><path d="M8 20V9l4-5 4 5v11"/><path d="M5 20h14"/></svg>دعائیں</button>
+</nav>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ==========================================================================
+   1) DUAS — add new ones by copying a block
+   ========================================================================== */
+const DUAS = [
+{ id:"hamm-huzn", title:"دعائے ہمّ و حُزن", titleEn:"Dua for Worry and Sadness",
+  narrator:"عبداللہ بن مسعود رضی اللہ عنہ سے روایت ہے",
+  benefit:"یہ دعا دل کے غم، پریشانی اور دکھوں کو دور کرنے اور اندر سکون پیدا کرنے کے لیے بہت مفید ہے۔",
+  reference:"صحیح — ابن ماجہ: 3872 | مسند احمد: 19515",
+  lines:[
+  {ar:"اللَّهُمَّ إِنِّي عَبْدُكَ، ابْنُ عَبْدِكَ، ابْنُ أَمَتِكَ،",ur:"اے اللہ! میں تیرا بندہ ہوں، تیرے بندے کا بیٹا ہوں، اور تیری بندی کا بیٹا ہوں،",en:"O Allah, I am Your servant, son of Your servant, son of Your maidservant."},
+  {ar:"نَاصِيَتِي بِيَدِكَ، مَاضٍ فِيَّ حُكْمُكَ،",ur:"میری پیشانی تیرے ہاتھ میں ہے، تیرا حکم مجھ میں نافذ ہو رہا ہے۔",en:"My forelock is in Your hand, Your command over me is forever executed."},
+  {ar:"عَدْلٌ فِيَّ قَضَاؤُكَ،",ur:"اور تیرا فیصلہ میرے حق میں عدل پر مبنی ہے۔",en:"And Your decree over me is just."},
+  {ar:"أَسْأَلُكَ بِكُلِّ اسْمٍ هُوَ لَكَ،",ur:"میں تجھ سے ہر اس نام کے ذریعے سوال کرتا ہوں جو تیرا ہے،",en:"I ask You by every name belonging to You,"},
+  {ar:"سَمَّيْتَ بِهِ نَفْسَكَ،",ur:"جسے تُو نے اپنے لیے نام رکھا،",en:"which You have named Yourself with,"},
+  {ar:"أَوْ أَنْزَلْتَهُ فِي كِتَابِكَ،",ur:"یا جو تُو نے اپنی کتاب میں اتارا،",en:"or revealed in Your Book,"},
+  {ar:"أَوْ عَلَّمْتَهُ أَحَدًا مِنْ خَلْقِكَ،",ur:"یا جو تُو نے اپنی مخلوق میں سے کسی کو سکھایا،",en:"or taught to any of Your creation,"},
+  {ar:"أَوِ اسْتَأْثَرْتَ بِهِ فِي عِلْمِ الْغَيْبِ عِنْدَكَ،",ur:"یا جو تُو نے غیب کے علم میں اپنے پاس مخصوص رکھا ہے،",en:"or kept hidden with You in the knowledge of the unseen —"},
+  {ar:"أَنْ تَجْعَلَ الْقُرْآنَ رَبِيعَ قَلْبِي،",ur:"کہ تُو قرآن کو میرے دل کی بہار بنا دے،",en:"that You make the Qur'an the spring of my heart,"},
+  {ar:"وَنُورَ صَدْرِي،",ur:"اور میرے سینے کا نور بنا دے،",en:"and the light of my chest,"},
+  {ar:"وَجَلَاءَ حُزْنِي، وَذَهَابَ هَمِّي.",ur:"اور میرے غم کو دور کر دے، اور میری پریشانی کو مٹا دے۔",en:"the banisher of my sorrow and the remover of my worry."}]},
+
+{ id:"hamm-bukhari", title:"دعائے فکر و قرض", titleEn:"Dua for Anxiety and Debt",
+  narrator:"انس بن مالک رضی اللہ عنہ سے روایت ہے",
+  benefit:"نبی ﷺ یہ دعا کثرت سے پڑھتے تھے۔ پریشانی، سستی، بزدلی اور قرض کے بوجھ سے نجات کے لیے پڑھی جاتی ہے۔",
+  reference:"صحیح بخاری: 2893",
+  lines:[
+  {ar:"اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ،",ur:"اے اللہ! میں فکر اور غم سے تیری پناہ مانگتا ہوں،",en:"O Allah, I seek refuge in You from worry and grief,"},
+  {ar:"وَالْعَجْزِ وَالْكَسَلِ،",ur:"اور عاجزی و سستی سے،",en:"from helplessness and laziness,"},
+  {ar:"وَالْبُخْلِ وَالْجُبْنِ،",ur:"اور بخل و بزدلی سے،",en:"from miserliness and cowardice,"},
+  {ar:"وَضَلَعِ الدَّيْنِ وَغَلَبَةِ الرِّجَالِ.",ur:"اور قرض کے بوجھ اور لوگوں کے غلبے سے۔",en:"from the burden of debt and being overpowered by men."}]},
+
+{ id:"istikhara", title:"دعائے استخارہ", titleEn:"Dua of Istikhara",
+  narrator:"جابر بن عبداللہ رضی اللہ عنہ سے روایت ہے",
+  benefit:"کسی بھی کام کا فیصلہ کرنے سے پہلے دو رکعت نفل پڑھ کر یہ دعا مانگی جاتی ہے۔ 'ھٰذَا الْأَمْرَ' کی جگہ اپنی ضرورت کا نام لیں۔",
+  reference:"صحیح بخاری: 1166",
+  lines:[
+  {ar:"اللَّهُمَّ إِنِّي أَسْتَخِيرُكَ بِعِلْمِكَ، وَأَسْتَقْدِرُكَ بِقُدْرَتِكَ،",ur:"اے اللہ! میں تیرے علم کے ذریعے تجھ سے خیر مانگتا ہوں، اور تیری قدرت کے ذریعے تجھ سے طاقت مانگتا ہوں،",en:"O Allah, I seek Your guidance by Your knowledge and Your strength by Your power,"},
+  {ar:"وَأَسْأَلُكَ مِنْ فَضْلِكَ الْعَظِيمِ،",ur:"اور تیرے عظیم فضل کا سوال کرتا ہوں،",en:"and I ask You of Your great bounty."},
+  {ar:"فَإِنَّكَ تَقْدِرُ وَلَا أَقْدِرُ، وَتَعْلَمُ وَلَا أَعْلَمُ، وَأَنْتَ عَلَّامُ الْغُيُوبِ.",ur:"کیونکہ تُو قدرت رکھتا ہے اور میں نہیں، تُو جانتا ہے اور میں نہیں جانتا، اور تُو ہی غیبوں کا جاننے والا ہے۔",en:"You have power and I have none, You know and I do not, and You are the Knower of the unseen."},
+  {ar:"اللَّهُمَّ إِنْ كُنْتَ تَعْلَمُ أَنَّ هٰذَا الْأَمْرَ خَيْرٌ لِي فِي دِينِي وَمَعَاشِي وَعَاقِبَةِ أَمْرِي،",ur:"اے اللہ! اگر تُو جانتا ہے کہ یہ کام میرے دین، میری معاش اور میرے انجام کے لیے بہتر ہے،",en:"O Allah, if You know this matter is good for my religion, my livelihood and my end,"},
+  {ar:"فَاقْدُرْهُ لِي وَيَسِّرْهُ لِي ثُمَّ بَارِكْ لِي فِيهِ،",ur:"تو اسے میرے لیے مقدر کر دے، آسان کر دے اور اس میں برکت عطا فرما،",en:"then decree it for me, make it easy for me, and bless me in it."},
+  {ar:"وَإِنْ كُنْتَ تَعْلَمُ أَنَّ هٰذَا الْأَمْرَ شَرٌّ لِي، فَاصْرِفْهُ عَنِّي وَاصْرِفْنِي عَنْهُ،",ur:"اور اگر تُو جانتا ہے کہ یہ کام میرے لیے برا ہے، تو اسے مجھ سے اور مجھے اس سے پھیر دے،",en:"But if You know it is bad for me, then turn it away from me and turn me away from it,"},
+  {ar:"وَاقْدُرْ لِيَ الْخَيْرَ حَيْثُ كَانَ، ثُمَّ أَرْضِنِي بِهِ.",ur:"اور میرے لیے خیر مقدر فرما جہاں بھی ہو، پھر مجھے اس پر راضی کر دے۔",en:"and decree for me what is good wherever it may be, then make me content with it."}]}
+];
+
+/* ==========================================================================
+   2) AZKAR — صبح و شام کے مسنون اذکار (صحیح احادیث)
+   ========================================================================== */
+const AZKAR = {
+morning:[
+ {ar:"أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ.",
+  ur:"ہم نے صبح کی اور تمام بادشاہی اللہ کی ہو گئی، سب تعریف اللہ کے لیے ہے۔ اللہ کے سوا کوئی معبود نہیں، وہ اکیلا ہے، اس کا کوئی شریک نہیں، اسی کی بادشاہی ہے، اسی کے لیے تعریف ہے اور وہ ہر چیز پر قادر ہے۔",
+  n:1, ref:"صحیح مسلم: 2723"},
+ {ar:"اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَٰهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَىٰ عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ بِذَنْبِي فَاغْفِرْ لِي فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ.",
+  ur:"سیّد الاستغفار — اے اللہ! تُو میرا رب ہے، تیرے سوا کوئی معبود نہیں۔ تُو نے مجھے پیدا کیا، میں تیرا بندہ ہوں، اور اپنی طاقت بھر تیرے عہد و وعدے پر قائم ہوں۔ میں اپنے کیے کی برائی سے تیری پناہ مانگتا ہوں۔ تیری نعمت کا اقرار کرتا ہوں اور اپنے گناہ کا بھی۔ پس مجھے بخش دے، تیرے سوا گناہ کوئی نہیں بخشتا۔",
+  n:1, ref:"صحیح بخاری: 6306"},
+ {ar:"اللَّهُمَّ عَافِنِي فِي بَدَنِي، اللَّهُمَّ عَافِنِي فِي سَمْعِي، اللَّهُمَّ عَافِنِي فِي بَصَرِي، لَا إِلَٰهَ إِلَّا أَنْتَ.",
+  ur:"اے اللہ! میرے جسم کو عافیت دے، میری سماعت کو عافیت دے، میری بصارت کو عافیت دے۔ تیرے سوا کوئی معبود نہیں۔",
+  n:3, ref:"سنن ابو داؤد: 5090 — حسن"},
+ {ar:"بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ، وَهُوَ السَّمِيعُ الْعَلِيمُ.",
+  ur:"اللہ کے نام سے، جس کے نام کے ساتھ زمین اور آسمان کی کوئی چیز نقصان نہیں پہنچا سکتی، اور وہ سننے والا جاننے والا ہے۔",
+  n:3, ref:"سنن ابو داؤد: 5088 | ترمذی: 3388 — صحیح"},
+ {ar:"رَضِيتُ بِاللَّهِ رَبًّا، وَبِالْإِسْلَامِ دِينًا، وَبِمُحَمَّدٍ ﷺ نَبِيًّا.",
+  ur:"میں اللہ کے رب ہونے پر، اسلام کے دین ہونے پر اور محمد ﷺ کے نبی ہونے پر راضی ہوں۔",
+  n:3, ref:"سنن ابو داؤد: 5072 | ترمذی: 3389"},
+ {ar:"حَسْبِيَ اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ، عَلَيْهِ تَوَكَّلْتُ، وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ.",
+  ur:"مجھے اللہ کافی ہے، اس کے سوا کوئی معبود نہیں، اسی پر میں نے بھروسہ کیا، اور وہ عرشِ عظیم کا رب ہے۔",
+  n:7, ref:"سنن ابو داؤد: 5081"},
+ {ar:"يَا حَيُّ يَا قَيُّومُ بِرَحْمَتِكَ أَسْتَغِيثُ، أَصْلِحْ لِي شَأْنِي كُلَّهُ، وَلَا تَكِلْنِي إِلَىٰ نَفْسِي طَرْفَةَ عَيْنٍ.",
+  ur:"اے زندہ! اے قائم رکھنے والے! میں تیری رحمت کے وسیلے سے فریاد کرتا ہوں۔ میرے سب معاملے درست فرما دے اور مجھے پلک جھپکنے کے برابر بھی میرے نفس کے حوالے نہ کر۔",
+  n:1, ref:"مستدرک حاکم: 1/545 — حسن"},
+ {ar:"سُبْحَانَ اللَّهِ وَبِحَمْدِهِ.",
+  ur:"اللہ پاک ہے اور تمام تعریف اسی کے لیے ہے۔",
+  n:100, ref:"صحیح بخاری: 6405 | مسلم: 2691"},
+ {ar:"لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ.",
+  ur:"اللہ کے سوا کوئی معبود نہیں، وہ اکیلا ہے، اس کا کوئی شریک نہیں، اسی کی بادشاہی ہے، اسی کے لیے تعریف ہے، اور وہ ہر چیز پر قادر ہے۔",
+  n:10, ref:"صحیح بخاری: 6403 | مسلم: 2691"},
+ {ar:"أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ.",
+  ur:"میں اللہ سے بخشش مانگتا ہوں اور اسی کی طرف رجوع کرتا ہوں۔",
+  n:100, ref:"صحیح بخاری: 6307 | مسلم: 2702"},
+ {ar:"اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَىٰ نَبِيِّنَا مُحَمَّدٍ.",
+  ur:"اے اللہ! ہمارے نبی محمد ﷺ پر درود و سلام بھیج۔",
+  n:10, ref:"سنن الکبریٰ للطبرانی — حسن"}
+],
+evening:[
+ {ar:"أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ.",
+  ur:"ہم نے شام کی اور تمام بادشاہی اللہ کی ہو گئی، سب تعریف اللہ کے لیے ہے۔ اللہ کے سوا کوئی معبود نہیں، وہ اکیلا ہے، اس کا کوئی شریک نہیں، اسی کی بادشاہی ہے، اسی کے لیے تعریف ہے اور وہ ہر چیز پر قادر ہے۔",
+  n:1, ref:"صحیح مسلم: 2723"},
+ {ar:"اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَٰهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَىٰ عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ بِذَنْبِي فَاغْفِرْ لِي فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ.",
+  ur:"سیّد الاستغفار — اے اللہ! تُو میرا رب ہے، تیرے سوا کوئی معبود نہیں۔ تُو نے مجھے پیدا کیا، میں تیرا بندہ ہوں، اور اپنی طاقت بھر تیرے عہد و وعدے پر قائم ہوں۔ میں اپنے کیے کی برائی سے تیری پناہ مانگتا ہوں۔ تیری نعمت کا اقرار کرتا ہوں اور اپنے گناہ کا بھی۔ پس مجھے بخش دے، تیرے سوا گناہ کوئی نہیں بخشتا۔",
+  n:1, ref:"صحیح بخاری: 6306"},
+ {ar:"أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ.",
+  ur:"میں اللہ کے مکمل کلمات کے ذریعے ہر اُس چیز کے شر سے پناہ مانگتا ہوں جو اُس نے پیدا کی۔",
+  n:3, ref:"صحیح مسلم: 2709"},
+ {ar:"بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ، وَهُوَ السَّمِيعُ الْعَلِيمُ.",
+  ur:"اللہ کے نام سے، جس کے نام کے ساتھ زمین اور آسمان کی کوئی چیز نقصان نہیں پہنچا سکتی، اور وہ سننے والا جاننے والا ہے۔",
+  n:3, ref:"سنن ابو داؤد: 5088 — صحیح"},
+ {ar:"اللَّهُمَّ عَافِنِي فِي بَدَنِي، اللَّهُمَّ عَافِنِي فِي سَمْعِي، اللَّهُمَّ عَافِنِي فِي بَصَرِي، لَا إِلَٰهَ إِلَّا أَنْتَ.",
+  ur:"اے اللہ! میرے جسم کو عافیت دے، میری سماعت کو عافیت دے، میری بصارت کو عافیت دے۔ تیرے سوا کوئی معبود نہیں۔",
+  n:3, ref:"سنن ابو داؤد: 5090 — حسن"},
+ {ar:"رَضِيتُ بِاللَّهِ رَبًّا، وَبِالْإِسْلَامِ دِينًا، وَبِمُحَمَّدٍ ﷺ نَبِيًّا.",
+  ur:"میں اللہ کے رب ہونے پر، اسلام کے دین ہونے پر اور محمد ﷺ کے نبی ہونے پر راضی ہوں۔",
+  n:3, ref:"سنن ابو داؤد: 5072"},
+ {ar:"حَسْبِيَ اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ، عَلَيْهِ تَوَكَّلْتُ، وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ.",
+  ur:"مجھے اللہ کافی ہے، اس کے سوا کوئی معبود نہیں، اسی پر میں نے بھروسہ کیا، اور وہ عرشِ عظیم کا رب ہے۔",
+  n:7, ref:"سنن ابو داؤد: 5081"},
+ {ar:"سُبْحَانَ اللَّهِ وَبِحَمْدِهِ.",
+  ur:"اللہ پاک ہے اور تمام تعریف اسی کے لیے ہے۔",
+  n:100, ref:"صحیح بخاری: 6405 | مسلم: 2691"},
+ {ar:"أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ.",
+  ur:"میں اللہ سے بخشش مانگتا ہوں اور اسی کی طرف رجوع کرتا ہوں۔",
+  n:100, ref:"صحیح بخاری: 6307 | مسلم: 2702"},
+ {ar:"اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَىٰ نَبِيِّنَا مُحَمَّدٍ.",
+  ur:"اے اللہ! ہمارے نبی محمد ﷺ پر درود و سلام بھیج۔",
+  n:10, ref:"حسن"}
+]};
+
+/* ==========================================================================
+   3) PRAYER TIME ENGINE  (offline astronomical calculation)
+   ========================================================================== */
+const D2R=Math.PI/180, R2D=180/Math.PI;
+const sin=d=>Math.sin(d*D2R), cos=d=>Math.cos(d*D2R), tan=d=>Math.tan(d*D2R);
+const asin=x=>Math.asin(x)*R2D, acos=x=>Math.acos(x)*R2D, atan2=(y,x)=>Math.atan2(y,x)*R2D;
+const acot=x=>Math.atan(1/x)*R2D;
+const fixA=a=>((a%360)+360)%360, fixH=h=>((h%24)+24)%24;
+
+const METHODS = {
+  karachi:{fajr:18,   isha:18},
+  mwl:    {fajr:18,   isha:17},
+  isna:   {fajr:15,   isha:15},
+  egypt:  {fajr:19.5, isha:17.5},
+  makkah: {fajr:18.5, ishaMin:90},
+  dubai:  {fajr:18.2, isha:18.2}
+};
+
+function julianDay(y,m,d){
+  if(m<=2){ y-=1; m+=12; }
+  const A=Math.floor(y/100), B=2-A+Math.floor(A/4);
+  return Math.floor(365.25*(y+4716))+Math.floor(30.6001*(m+1))+d+B-1524.5;
+}
+function sunPos(jd){
+  const D=jd-2451545.0;
+  const g=fixA(357.529+0.98560028*D);
+  const q=fixA(280.459+0.98564736*D);
+  const L=fixA(q+1.915*sin(g)+0.020*sin(2*g));
+  const e=23.439-0.00000036*D;
+  const RA=fixH(atan2(cos(e)*sin(L),cos(L))/15);
+  return { decl:asin(sin(e)*sin(L)), eqt:q/15-RA };
+}
+function computeTimes(date, lat, lng, tzHours, methodKey, asrFactor){
+  const jd0 = julianDay(date.getFullYear(), date.getMonth()+1, date.getDate()) - lng/(15*24);
+  const M = METHODS[methodKey];
+
+  const midDay = t => fixH(12 - sunPos(jd0+t).eqt);
+  const angleTime = (angle, t, ccw) => {
+    const dec = sunPos(jd0+t).decl;
+    const num = -sin(angle) - sin(dec)*sin(lat);
+    const den = cos(dec)*cos(lat);
+    const v = num/den;
+    if(v > 1 || v < -1) return NaN;              // sun never reaches angle
+    const T = acos(v)/15;
+    return midDay(t) + (ccw ? -T : T);
+  };
+  const asrT = (factor, t) => {
+    const dec = sunPos(jd0+t).decl;
+    const angle = -acot(factor + tan(Math.abs(lat-dec)));
+    return angleTime(angle, t, false);
+  };
+
+  let t = {fajr:5/24, sunrise:6/24, dhuhr:12/24, asr:13/24, maghrib:18/24, isha:18/24};
+  for(let i=0;i<3;i++){
+    const n = {
+      fajr:    angleTime(M.fajr, t.fajr, true),
+      sunrise: angleTime(0.833,  t.sunrise, true),
+      dhuhr:   midDay(t.dhuhr),
+      asr:     asrT(asrFactor, t.asr),
+      maghrib: angleTime(0.833,  t.maghrib, false),
+      isha:    M.ishaMin ? null : angleTime(M.isha, t.isha, false)
+    };
+    if(M.ishaMin) n.isha = n.maghrib + M.ishaMin/60;
+    for(const k in n) t[k] = n[k]/24;
+  }
+  const adj = tzHours - lng/15;
+  const out = {};
+  for(const k in t){ out[k] = isNaN(t[k]) ? NaN : fixH(t[k]*24 + adj); }
+  out.dhuhr += 1/60;               // slight safety offset after zenith
+  return out;
+}
+function qiblaBearing(lat,lng){
+  const KLAT=21.4225, KLNG=39.8262;
+  const dL = KLNG - lng;
+  return fixA(atan2(sin(dL)*cos(KLAT), cos(lat)*sin(KLAT) - sin(lat)*cos(KLAT)*cos(dL)));
+}
+function makkahDistance(lat,lng){
+  const KLAT=21.4225, KLNG=39.8262, R=6371;
+  const dLat=(KLAT-lat)*D2R, dLng=(KLNG-lng)*D2R;
+  const a=Math.sin(dLat/2)**2 + Math.cos(lat*D2R)*Math.cos(KLAT*D2R)*Math.sin(dLng/2)**2;
+  return Math.round(R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a)));
+}
+
+/* ==========================================================================
+   4) APP
+   ========================================================================== */
+const $ = s => document.querySelector(s);
+const store = {
+  get(k,d){ try{ const v=localStorage.getItem(k); return v===null?d:JSON.parse(v) }catch{ return d } },
+  set(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)) }catch{} }
+};
+let S = {
+  lat: store.get('lat', null), lng: store.get('lng', null), city: store.get('city',''),
+  madhab: store.get('madhab','1'), method: store.get('method','karachi'),
+  alarms: store.get('alarms', {fajr:true,dhuhr:true,asr:true,maghrib:true,isha:true}),
+  zikrCount: store.get('zikrCount', {}), zikrDay: store.get('zikrDay',''),
+  arSize: store.get('arSize',23), showEn:false, azkarMode:'morning', currentDua:null,
+  times:null, fired:{}
+};
+document.documentElement.style.setProperty('--ar-size', S.arSize+'px');
+
+const NAMES = {
+  fajr:{ur:'فجر',en:'FAJR',ic:'🌌'}, sunrise:{ur:'طلوعِ آفتاب',en:'SUNRISE',ic:'🌅'},
+  dhuhr:{ur:'ظہر',en:'DHUHR',ic:'🌤️'}, asr:{ur:'عصر',en:'ASR',ic:'🌇'},
+  maghrib:{ur:'مغرب',en:'MAGHRIB',ic:'🌆'}, isha:{ur:'عشاء',en:'ISHA',ic:'🌙'}
+};
+const ORDER = ['fajr','sunrise','dhuhr','asr','maghrib','isha'];
+
+function toast(m){ const t=$('#toast'); t.textContent=m; t.classList.add('show');
+  clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('show'),2000); }
+function fmt(h){
+  if(isNaN(h)) return '—';
+  let hh=Math.floor(h), mm=Math.round((h-hh)*60);
+  if(mm===60){mm=0;hh=(hh+1)%24}
+  const ap = hh<12?'AM':'PM'; const h12 = hh%12===0?12:hh%12;
+  return `${h12}:${String(mm).padStart(2,'0')} ${ap}`;
+}
+
+/* ---- tabs ---- */
+document.querySelectorAll('.tabbar button').forEach(b=>{
+  b.onclick=()=>{
+    document.querySelectorAll('.tabbar button').forEach(x=>x.setAttribute('aria-selected', x===b));
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
+    $('#pg-'+b.dataset.pg).classList.add('on');
+    closeDua();
+    window.scrollTo({top:0});
+  };
+});
+
+/* ---- prayer render ---- */
+function refreshTimes(){
+  if(S.lat===null){ $('#prayers').innerHTML=''; return; }
+  const tz = -new Date().getTimezoneOffset()/60;
+  S.times = computeTimes(new Date(), S.lat, S.lng, tz, S.method, Number(S.madhab));
+  renderPrayers(); tick(); renderQibla();
+}
+function renderPrayers(){
+  const now = new Date(); const cur = now.getHours()+now.getMinutes()/60;
+  let currentKey=null;
+  ORDER.forEach(k=>{ if(!isNaN(S.times[k]) && S.times[k]<=cur) currentKey=k; });
+
+  $('#prayers').innerHTML = ORDER.map(k=>`
+    <div class="p-row ${k===currentKey?'now':''}">
+      <span class="ic">${NAMES[k].ic}</span>
+      <span>
+        <div class="nm">${NAMES[k].ur}</div>
+        <div class="sub">${NAMES[k].en}</div>
+      </span>
+      <span class="tm">${fmt(S.times[k])}</span>
+      ${k==='sunrise' ? '' :
+        `<button class="bell" data-k="${k}" aria-pressed="${!!S.alarms[k]}" title="الارم">${S.alarms[k]?'🔔':'🔕'}</button>`}
+    </div>`).join('');
+
+  $('#prayers').querySelectorAll('.bell').forEach(b=> b.onclick=()=>{
+    const k=b.dataset.k; S.alarms[k]=!S.alarms[k]; store.set('alarms',S.alarms);
+    b.setAttribute('aria-pressed', S.alarms[k]); b.textContent = S.alarms[k]?'🔔':'🔕';
+    toast(NAMES[k].ur + (S.alarms[k]?' کا الارم آن':' کا الارم آف'));
+  });
+  $('#place').textContent = S.city ? `📍 ${S.city}` : `📍 ${S.lat.toFixed(3)}, ${S.lng.toFixed(3)}`;
+}
+
+function tick(){
+  if(!S.times) return;
+  const now=new Date(); const cur=now.getHours()+now.getMinutes()/60+now.getSeconds()/3600;
+  const keys=['fajr','dhuhr','asr','maghrib','isha'];
+  let nk=null;
+  for(const k of keys){ if(!isNaN(S.times[k]) && S.times[k]>cur){ nk=k; break; } }
+  let diff;
+  if(nk){ diff=S.times[nk]-cur; } else { nk='fajr'; diff=24-cur+S.times.fajr; }
+  const h=Math.floor(diff), m=Math.floor((diff-h)*60), s=Math.floor(((diff-h)*60-m)*60);
+  $('#nextName').textContent = NAMES[nk].ur;
+  $('#nextCd').textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')} باقی`;
+
+  // in-app alarm
+  const stamp = now.toDateString();
+  keys.forEach(k=>{
+    if(!S.alarms[k] || isNaN(S.times[k])) return;
+    const key = stamp+k;
+    if(Math.abs(cur - S.times[k]) < 1/120 && !S.fired[key]){
+      S.fired[key]=true; fireAlarm(k);
+    }
+  });
+}
+setInterval(tick,1000);
+
+function fireAlarm(k){
+  const msg = NAMES[k].ur + ' کا وقت ہو گیا ہے';
+  try{ if(Notification.permission==='granted') new Notification('اذان', {body:msg}); }catch{}
+  beep(); toast('🔔 ' + msg);
+}
+function beep(){
+  try{
+    const ac=new (window.AudioContext||window.webkitAudioContext)();
+    [0,.45,.9].forEach(d=>{
+      const o=ac.createOscillator(), g=ac.createGain();
+      o.type='sine'; o.frequency.value=660; o.connect(g); g.connect(ac.destination);
+      g.gain.setValueAtTime(0.0001, ac.currentTime+d);
+      g.gain.exponentialRampToValueAtTime(0.25, ac.currentTime+d+0.05);
+      g.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime+d+0.4);
+      o.start(ac.currentTime+d); o.stop(ac.currentTime+d+0.42);
+    });
+  }catch{}
+}
+
+/* ---- location ---- */
+function getLocation(cb){
+  if(!navigator.geolocation){ toast('اس ڈیوائس پر مقام دستیاب نہیں'); return; }
+  toast('مقام معلوم کیا جا رہا ہے…');
+  navigator.geolocation.getCurrentPosition(p=>{
+    S.lat=p.coords.latitude; S.lng=p.coords.longitude; S.city='';
+    store.set('lat',S.lat); store.set('lng',S.lng); store.set('city','');
+    refreshTimes(); toast('مقام محفوظ ہو گیا'); cb&&cb();
+  }, ()=> toast('اجازت نہیں ملی — دستی مقام استعمال کریں'), {enableHighAccuracy:true,timeout:12000});
+}
+$('#locBtn').onclick = ()=>getLocation();
+$('#qLocBtn').onclick = ()=>getLocation();
+$('#manualBtn').onclick = ()=>{
+  const v = prompt('عرض بلد اور طول بلد لکھیں (latitude, longitude)\nمثال: 31.5204, 74.3587 (لاہور)', S.lat?`${S.lat}, ${S.lng}`:'31.5204, 74.3587');
+  if(!v) return;
+  const [a,b] = v.split(',').map(x=>parseFloat(x.trim()));
+  if(isNaN(a)||isNaN(b)) return toast('غلط قدر');
+  S.lat=a; S.lng=b; S.city = prompt('شہر کا نام (اختیاری)','')||'';
+  store.set('lat',a); store.set('lng',b); store.set('city',S.city);
+  refreshTimes(); toast('مقام محفوظ ہو گیا');
+};
+$('#notifBtn').onclick = async ()=>{
+  try{ const r = await Notification.requestPermission();
+    toast(r==='granted'?'اطلاعات آن ہو گئیں':'اجازت نہیں ملی'); beep();
+  }catch{ toast('اس براؤزر میں اطلاعات دستیاب نہیں'); }
+};
+$('#madhab').onchange = e=>{ S.madhab=e.target.value; store.set('madhab',S.madhab); refreshTimes(); };
+$('#method').onchange = e=>{ S.method=e.target.value; store.set('method',S.method); refreshTimes(); };
+$('#madhab').value=S.madhab; $('#method').value=S.method;
+
+/* ---- qibla ---- */
+let heading = null;
+function renderQibla(){
+  if(S.lat===null) return;
+  const b = qiblaBearing(S.lat,S.lng);
+  $('#qdeg').textContent = b.toFixed(1)+'°';
+  $('#qtxt').innerHTML = `شمال سے ${b.toFixed(1)} ڈگری &nbsp;·&nbsp; مکہ مکرمہ ${makkahDistance(S.lat,S.lng).toLocaleString()} کلومیٹر`;
+  updateDial(b);
+}
+function updateDial(b){
+  if(heading===null){
+    $('#dial').style.transform='rotate(0deg)';
+    $('#needle').style.transform=`rotate(${b}deg)`;
+  }else{
+    $('#dial').style.transform=`rotate(${-heading}deg)`;
+    $('#needle').style.transform=`rotate(${b-heading}deg)`;
+  }
+}
+function onOrient(e){
+  let h = e.webkitCompassHeading!=null ? e.webkitCompassHeading
+        : (e.alpha!=null ? (e.absolute? 360-e.alpha : 360-e.alpha) : null);
+  if(h===null) return;
+  heading = fixA(h);
+  if(S.lat!==null) updateDial(qiblaBearing(S.lat,S.lng));
+}
+$('#qCompassBtn').onclick = async ()=>{
+  try{
+    if(typeof DeviceOrientationEvent!=='undefined' && DeviceOrientationEvent.requestPermission){
+      const r = await DeviceOrientationEvent.requestPermission();
+      if(r!=='granted') return toast('کمپاس کی اجازت نہیں ملی');
+    }
+    window.addEventListener('deviceorientationabsolute', onOrient, true);
+    window.addEventListener('deviceorientation', onOrient, true);
+    toast('کمپاس آن — فون سیدھا رکھیں');
+  }catch{ toast('اس ڈیوائس پر کمپاس دستیاب نہیں'); }
+};
+
+/* ---- azkar ---- */
+function todayKey(){ return new Date().toDateString(); }
+if(S.zikrDay !== todayKey()){ S.zikrCount={}; S.zikrDay=todayKey(); store.set('zikrCount',{}); store.set('zikrDay',S.zikrDay); }
+
+function renderAzkar(){
+  const list = AZKAR[S.azkarMode];
+  $('#azkarNote').textContent = S.azkarMode==='morning'
+    ? 'وقت: فجر کے بعد سے طلوعِ آفتاب تک۔ ہر ذکر پر شمار کے بٹن کو ٹیپ کرتے جائیں۔'
+    : 'وقت: عصر کے بعد سے مغرب تک۔ ہر ذکر پر شمار کے بٹن کو ٹیپ کرتے جائیں۔';
+  $('#azkarList').innerHTML = list.map((z,i)=>{
+    const key = S.azkarMode+i, done = S.zikrCount[key]||0;
+    return `<div class="zikr ${done>=z.n?'done':''}" data-i="${i}">
+      <div class="ar">${z.ar}</div>
+      <div class="ur">${z.ur}</div>
+      <div class="meta">
+        <span class="ref">${z.ref} · ${z.n} بار</span>
+        <button class="count ${done>=z.n?'done':''}" data-k="${key}" data-n="${z.n}">${done} / ${z.n}</button>
+      </div></div>`;
+  }).join('');
+  $('#azkarList').querySelectorAll('.count').forEach(b=> b.onclick=()=>{
+    const k=b.dataset.k, n=Number(b.dataset.n);
+    const v = Math.min(n, (S.zikrCount[k]||0)+1);
+    S.zikrCount[k]=v; store.set('zikrCount',S.zikrCount);
+    b.textContent = `${v} / ${n}`;
+    b.classList.toggle('done', v>=n);
+    b.closest('.zikr').classList.toggle('done', v>=n);
+    if(v>=n) toast('ماشاء اللہ ✓');
+  });
+}
+$('#segM').onclick=()=>{ S.azkarMode='morning'; $('#segM').setAttribute('aria-pressed',true); $('#segE').setAttribute('aria-pressed',false); renderAzkar(); };
+$('#segE').onclick=()=>{ S.azkarMode='evening'; $('#segE').setAttribute('aria-pressed',true); $('#segM').setAttribute('aria-pressed',false); renderAzkar(); };
+$('#resetZ').onclick=()=>{ S.zikrCount={}; store.set('zikrCount',{}); renderAzkar(); toast('شمار صفر کر دیا گیا'); };
+
+/* ---- duas ---- */
+function renderDuaList(){
+  const q = $('#search').value.trim().toLowerCase();
+  const items = DUAS.filter(d => !q || (d.title+d.titleEn+d.lines.map(l=>l.ur+l.en).join('')).toLowerCase().includes(q));
+  $('#cards').innerHTML = items.length ? items.map((d,i)=>`
+    <button class="duacard" data-id="${d.id}">
+      <span class="idx">${i+1}</span>
+      <span style="flex:1;min-width:0">
+        <h3>${d.title}</h3><p>${d.titleEn} · ${d.lines.length} lines</p>
+      </span><span style="color:var(--gold);font-size:19px">‹</span>
+    </button>`).join('')
+    : `<p class="note" style="text-align:center;padding:30px">کوئی دعا نہیں ملی۔</p>`;
+  $('#cards').querySelectorAll('.duacard').forEach(c=> c.onclick=()=>openDua(c.dataset.id));
+}
+function openDua(id){
+  const d = DUAS.find(x=>x.id===id); if(!d) return;
+  S.currentDua = d;
+  $('#duaDetail').innerHTML = `
+    <div class="hero"><h2>${d.title}</h2><p class="en">${d.titleEn}</p><span class="narr">${d.narrator}</span></div>
+    <div class="rows">${d.lines.map((l,i)=>`
+      <div class="row">
+        <div class="cell"><span class="num">${i+1}</span><span class="ar-txt">${l.ar}</span></div>
+        <div class="cell tr-ur ${S.showEn?'hidden':''}"><span class="num">${i+1}</span><span class="ur-txt">${l.ur}</span></div>
+        <div class="cell tr-en ${S.showEn?'':'hidden'}"><span class="num">${i+1}</span><span class="en-txt">${l.en}</span></div>
+      </div>`).join('')}</div>
+    <div class="benefit"><b>❁ فائدہ</b><p>${d.benefit}</p></div>
+    <p class="ref">❁ ${d.reference} ❁</p>`;
+  $('#duaList').style.display='none'; $('#duaDetail').style.display='block';
+  $('#duaActions').style.display='flex'; $('#backBtn').style.display='grid';
+  $('#ttl').textContent = d.title; window.scrollTo({top:0});
+}
+function closeDua(){
+  S.currentDua=null;
+  $('#duaList').style.display='block'; $('#duaDetail').style.display='none';
+  $('#duaActions').style.display='none'; $('#backBtn').style.display='none';
+  $('#ttl').textContent='نورِ ہدایت';
+}
+$('#backBtn').onclick = closeDua;
+$('#search').oninput = renderDuaList;
+$('#langBtn').onclick = ()=>{
+  S.showEn=!S.showEn;
+  $('#duaDetail').querySelectorAll('.tr-ur').forEach(e=>e.classList.toggle('hidden',S.showEn));
+  $('#duaDetail').querySelectorAll('.tr-en').forEach(e=>e.classList.toggle('hidden',!S.showEn));
+};
+$('#shareBtn').onclick = async ()=>{
+  const d=S.currentDua; if(!d) return;
+  const text = `${d.title} — ${d.titleEn}\n\n` +
+    d.lines.map((l,i)=>`${i+1}. ${l.ar}\n   ${S.showEn?l.en:l.ur}`).join('\n\n') + `\n\n${d.reference}`;
+  try{ if(navigator.share) await navigator.share({title:d.title,text});
+       else { await navigator.clipboard.writeText(text); toast('کاپی ہو گئی'); } }catch{}
+};
+$('#sizeBtn').onclick = ()=>{
+  S.arSize = S.arSize>=31 ? 19 : S.arSize+4;
+  document.documentElement.style.setProperty('--ar-size', S.arSize+'px');
+  store.set('arSize', S.arSize); toast('عربی سائز: '+S.arSize+'px');
+};
+
+/* ---- init ---- */
+renderAzkar(); renderDuaList();
+if(S.lat!==null) refreshTimes(); else $('#nextCd').textContent='مقام معلوم کریں';
+setInterval(()=>{ if(S.lat!==null) refreshTimes(); }, 60*60*1000);
+</script>
+<script src="native-alarms.js"></script>
+</body>
+</html>
